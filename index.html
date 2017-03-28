@@ -4,12 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
     <meta name="viewport" content="initial-scale=1.0">
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init("user_ktxTElrIk3wM7u3yNAJgq");
-        })();
-    </script>
     <style>
         #content {
             border:3px solid#aaa;
@@ -29,59 +23,72 @@
             color:#196390;
         }
     </style>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 </head>
-<img src="http://www.berkeleyschools.net/wp-content/uploads/2017/02/BUSD-logo-official.jpg" width="300">
+<body>
+    <img src="http://www.berkeleyschools.net/wp-content/uploads/2017/02/BUSD-logo-official.jpg" width="300">
 
-<div id="content">
-    <h1>Web Page Blocked</h1>
-    <p>Access to the web page you were trying to visit has been blocked in accordance with Berkeley Unified policy. Please use the link below if you believe this is in error.</p>
-    <p><b>User:</b> <user/> </p>
-    <p><b>URL:</b> <url/> </p>
-    <p><b>Category:</b> <category/> </p>
-    <p><b><a
-            href="mailto:contentfilter@berkeley.net?subject=Web%20site%20Blocked%20(%3cuser/%3e)&amp;body=Unblock%20website%20request%20!!%0AUser%3A%20%3cuser/%3e%0AURL%20Category%3A%20%3ccategory/%3e%0AURL%3A%20%3curl/%3e%0APlease%20elaborate%20your%20need%20here%3A%0A">Send
-        Email Unblock Request to Helpdesk</a><o:p></o:p></span></p>
-</div>
+    <div id="content">
+        <h1>Web Page Blocked</h1>
+        <p>Access to the web page you were trying to visit has been blocked in accordance with
+            Berkeley Unified policy. Please use the link below if you believe this is in error.</p>
+        <p><b>User:</b> <user/> </p>
+        <p><b>URL:</b> <url/> </p>
+        <p><b>Category:</b> <category/> </p>
+    </div>
 
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <div id="output"></div>
+
+    <label>email</label>
+    <input type="text" id="reply_to" value="bhs@berkeley.net"/>
+    <label>from_name</label>
+    <input type="text" id="from_name" value="The Boss"/>
+    <label>to_name</label>
+    <input type="text" id="to_name" value="Recipient"/>
+    <label>message_html</label>
+    <input type="text" id="message_html" value="Houston, we have a problem"/>
+    <button onclick="sendEmail()">Send</button>
 
 
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
+
+        //comma separated list of recipients
+        var bhs_emailList = "jaynitschke@berkeley.net";
+
+        /*
+        LOGIN INFO FOR EMAILJS
+        http://dashboard.emailjs.com/account/login
+        email: bhs@berkeley.net
+        pw: bhsbhs01
+        */
+
         (function(){
             emailjs.init("user_mfVXuaK2e6zPnCxt0yWBP");
         })();
+
+        function sendEmail() {
+            emailjs.send("service_gmail", "busd_unblock_request", {
+                email: bhs_emailList,
+                reply_to: $("#reply_to").val(),
+                from_name: $("#from_name").val(),
+                to_name: $("#to_name").val(),
+                message_html: $("#message_html").val()
+            })
+            .then(
+                function(response) {
+                    $("#output").html("Success").css("color","green");
+                },
+                function(error) {
+                    $("#output").html("Failed:" + error.text).css("color","red");
+                }
+            );
+        }
+
     </script>
 
-    <form id="myform">
-        <label>reply_to</label>
-        <input type="text" name="reply_to" />
-        <label>from_name</label>
-        <input type="text" name="from_name" />
-        <label>to_name</label>
-        <input type="text" name="to_name" />
-        <label>message_html</label>
-        <input type="text" name="message_html" />
-        <br><br>
-        <button>
-        Send
-        </button>
-    </form>
-
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init("user_ktxTElrIk3wM7u3yNAJgq");
-        })();
-    </script>
-
-    <script type="text/javascript">
-            emailjs.send("pan_berkeley_net","template_gsyhLv9H",{name: "{{<user/>}}", notes: "Check this out!"});
-    </script>
-
-    </div>
     </body>
     </html>
+
