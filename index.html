@@ -35,9 +35,9 @@
         <h1>Web Page Blocked</h1>
         <p>Access to the web page you were trying to visit has been blocked in accordance with
             Berkeley Unified policy. Please use the link below if you believe this is in error.</p>
-        <p><b>User:</b> <user/> </p>
-        <p><b>URL:</b> <url/> </p>
-        <p><b>Category:</b> <category/> </p>
+        <p><b>User:</b> <div id="user">user<user/></div> </p>
+        <p><b>URL:</b> <div id="url">url<url/></div> </p>
+        <p><b>Category:</b> <div id="category">category<category/></div></p>
     </div>
 
     <div id="output"></div>
@@ -55,9 +55,6 @@
 
     <script type="text/javascript">
 
-        //comma separated list of recipients
-        //var bhs_emailList = "jaynitschke@berkeley.net";
-
         /*
         LOGIN INFO FOR EMAILJS
         http://dashboard.emailjs.com/account/login
@@ -71,11 +68,13 @@
 
         function sendEmail() {
             emailjs.send("service_gmail", "busd_unblock_request", {
-                //email: bhs_emailList,
                 reply_to: $("#reply_to").val(),
                 from_name: $("#from_name").val(),
                 to_name: $("#to_name").val(),
-                message_html: $("#message_html").val()
+                message_html: $("#message_html").val(),
+                user: $("#user").text(),
+                url: $("#url").text(),
+                category: $("#category").text()
             })
             .then(
                 function(response) {
