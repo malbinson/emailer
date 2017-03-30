@@ -6,8 +6,8 @@
     <meta name="viewport" content="initial-scale=1.0">
     <style>
         #content {
-            border:3px solid#aaa;
-            background-color:#fff;
+            border:3px solid #aaa;
+            background-color:ghostwhite;
             margin:1.5em;
             padding:1.5em;
             font-family:Tahoma,Helvetica,Arial,sans-serif;
@@ -20,7 +20,6 @@
         }
         b {
             font-weight:normal;
-            color:#196390;
         }
         td {
             vertical-align: top;
@@ -33,7 +32,7 @@
 
 </head>
 <body>
-<img src="http://www.berkeleyschools.net/wp-content/uploads/2017/02/BUSD-logo-official.jpg" width="300">
+<img src="http://www.berkeleyschools.net/wp-content/uploads/2017/02/BUSD-logo-official.jpg" width="300" style="padding-left:25px">
 
 <div id="content">
     <h1>Web Page Blocked</h1>
@@ -51,16 +50,12 @@
     </tr>
     <tr>
         <td><b>Reason for allowing this URL:</b></td>
-        <td><textarea id="message_html" cols="50" rows="10"></textarea></td>
+        <td><textarea id="message_html" cols="48" rows="10"></textarea></td>
     </tr>
     <tr>
         <td></td>
-        <td><button onclick="sendEmail()">Send</button></td>
+        <td><button onclick="sendEmail()" style="height:30px;width:70px">Send</button>&nbsp;<span id="output"></span></td>
     </tr>
-        <tr>
-            <td></td>
-            <td><div id="output"></div></td>
-        </tr>
     </table>
 
 
@@ -68,9 +63,10 @@
     <script type="text/javascript">
         (function(){
             emailjs.init("user_mfVXuaK2e6zPnCxt0yWBP");
+            $("#reply_to").focus();
         })();
         function sendEmail() {
-            emailjs.send("service_gmail", "busd_unblock_request", {
+            emailjs.send("service_gmail", "busd_unblock_requestz", {
                 reply_to: $("#reply_to").val(),
                 from_name: $("#from_name").val(),
                 to_name: $("#to_name").val(),
